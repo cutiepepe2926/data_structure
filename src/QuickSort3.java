@@ -1,61 +1,61 @@
-// 퀵 정렬(개선한 버전)
-
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 class QuickSort3 {
-	
-    //--- 배열 요소 a[idx1]와 a[idx2]의 값을 교환 ---//
-    static void swap(int[] a, int idx1, int idx2) {
-        int t = a[idx1];  a[idx1] = a[idx2];  a[idx2] = t;
-    }
 
-    //--- x[a], x[b], x[c]을 정렬(중앙값의 인덱스를 반환)---//
-    static int sort3elem(int[] x, int a, int b, int c) {
-        if (x[b] < x[a]) swap(x, b, a);
-        if (x[c] < x[b]) swap(x, c, b);
-        if (x[b] < x[a]) swap(x, b, a);
-        return b;
-    }
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new  InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
 
-    //--- 퀵 정렬 ---//
-    static void quickSort(int[] a, int left, int right) {
-        int pl = left;                                  // 왼쪽 커서
-        int pr = right;                                 // 오른쪽 커서
-        int m = sort3elem(a, pl, (pl + pr) / 2, pr);    // 맨 앞・맨 끝・가운데를 정렬
-        int x = a[m];                                   // 피벗
-
-        swap(a, m, right - 1);            // 가운데 요소와 맨 끝에서 2번째 요소를 교환 
-        pl++;                             // 왼쪽 커서를 1 오른쪽으로
-        pr -= 2;                          // 오른쪽 커서를 2 왼쪽으로
-
-        do {
-            while (a[pl] < x) pl++;
-            while (a[pr] > x) pr--;
-            if (pl <= pr)
-                swap(a, pl++, pr--);
-        } while (pl <= pr);
-
-        if (left < pr)  quickSort(a, left, pr);
-        if (pl < right) quickSort(a, pl, right);
-    }
-
-    public static void main(String[] args) {
-        Scanner stdIn = new Scanner(System.in);
-
-        System.out.println("퀵 정렬");
-        System.out.print("요솟수: ");
-        int nx = stdIn.nextInt();
-        int[] x = new int[nx];
-
-        for (int i = 0; i < nx; i++) {
-            System.out.print("x[" + i + "]: ");
-            x[i] = stdIn.nextInt();
+        for (int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(br.readLine());
         }
 
-        quickSort(x, 0, nx - 1);            // 배열 x를 퀵정렬
+        quickSort(arr, 0, arr.length-1);
 
-        System.out.println("오름차순으로 정렬했습니다.");
-        for (int i = 0; i < nx; i++)
-            System.out.println("x[" + i + "]=" + x[i]);
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < N; i++) {
+            sb.append(arr[i] + "\n");
+        }
+        br.close();
+        System.out.println(sb.toString());
+    }
+
+    public static void swap(int[] arr, int idx1, int idx2) {
+        int temp = arr[idx1];
+        arr[idx1] = arr[idx2];
+        arr[idx2] = temp;
+    }
+
+    public static void threeSort(int[] arr, int front, int mid, int end) {
+        if (arr[front] > arr[mid]) swap(arr, front, mid);
+        if (arr[mid] > arr[end]) swap(arr, mid, end);
+        if (arr[front] > arr[mid]) swap(arr, front, mid);
+    }
+
+    public static void quickSort(int[] arr, int front, int end) {
+        int mid = (front+end)/2;
+        threeSort(arr, front, mid, end);
+
+        if (end - front + 1 > 3) {
+            int pivot = arr[mid];
+            swap(arr, mid, end-1);
+            int pl = front;
+            int pr = end - 1;
+
+            while (true) {
+                do {pl++;} while ( arr[pl] < pivot && pl < end);
+                do {pr--;} while (arr[pr] > pivot && front < pr);
+                if (pl >= pr) break;
+                swap(arr, pl, pr);
+            }
+
+            swap(arr, pl, end-1);
+            quickSort(arr, front, pl-1);
+            quickSort(arr, pl+1, end);
+
+        }
     }
 }
