@@ -19,17 +19,17 @@ public class MergeSortWithComparator {
             return name + " " + height + " " + vision;
         }
 
-        // 키의 오름차순용 comparator
-        static final Comparator<PhyscData> HEIGHT_ORDER = new HeightOrderComparator();
-
-        // comparator 구현
-        private static class HeightOrderComparator implements Comparator<PhyscData> {
-            public int compare(PhyscData o1, PhyscData o2) {
-                return Integer.compare(o1.height, o2.height);
-//                return (o1.height > o2.height) ? 1 :
-//                        (o1.height < o2.height) ? -1 : 0;
-            }
-        }
+//        // 키의 오름차순용 comparator
+//        static final Comparator<PhyscData> HEIGHT_ORDER = new HeightOrderComparator();
+//
+//        // comparator 구현
+//        private static class HeightOrderComparator implements Comparator<PhyscData> {
+//            public int compare(PhyscData o1, PhyscData o2) {
+//                return Integer.compare(o1.height, o2.height);
+////                return (o1.height > o2.height) ? 1 :
+////                        (o1.height < o2.height) ? -1 : 0;
+//            }
+//        }
     }
 
     public static void main(String[] args) {
@@ -44,7 +44,8 @@ public class MergeSortWithComparator {
         };
 
         // 배열 x를 HEIGHT_ORDER를 사용하여 정렬
-        Arrays.sort(physcData, PhyscData.HEIGHT_ORDER);
+        //Arrays.sort(physcData, PhyscData.HEIGHT_ORDER);
+        Arrays.sort(physcData, (a, b) -> a.height > b.height ? 1 : (a.height < b.height) ? -1 : 0);
 
         System.out.println("신체검사 리스트");
         for (PhyscData physcData1 : physcData) {
