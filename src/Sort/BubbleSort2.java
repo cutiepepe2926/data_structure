@@ -1,3 +1,5 @@
+package Sort;
+
 import java.util.*;
 // 1차 개선 bubbleSort -> 정렬된 경우 바로 stop
 public class BubbleSort2 {

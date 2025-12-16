@@ -1,4 +1,5 @@
-import java.util.*;
+package Sort;
+
 import java.io.*;
 
 class QuickSort3 {

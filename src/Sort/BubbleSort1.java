@@ -1,3 +1,5 @@
+package Sort;
+
 import java.util.*;
 // 단순 bubbleSort
 public class BubbleSort1 {

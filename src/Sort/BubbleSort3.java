@@ -1,3 +1,5 @@
+package Sort;
+
 import java.util.*;
 // 2차 개선 bubbleSort -> 정렬된 부분 건너뛰기
 public class BubbleSort3 {

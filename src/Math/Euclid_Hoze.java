@@ -1,3 +1,5 @@
+package Math;
+
 public class Euclid_Hoze {
     public static void main(String[] args) {
         System.out.println("30와 160의 최대공약수 : " + gcd(150,30));
