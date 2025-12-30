@@ -1,23 +1,27 @@
 import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String T = br.readLine();
-        String P = br.readLine();
-        br.close();
-        StringBuilder sb = new StringBuilder();
-        int index = -1;
-        int num = 0;
-        while (true) {
-            if (index+1 >= T.length()) break;
-            index = T.indexOf(P, index + P.length());
-            if (index == -1) break;
-            num++;
-            sb.append(index+1).append("\n");
+        long n = Long.parseLong(br.readLine());
+        ArrayList<Integer> al = new ArrayList<>();
+
+        long cut = Math.round( (double)n * 0.15);
+
+        for (int i = 0; i < n; i++) {
+            al.add(Integer.parseInt(br.readLine()));
         }
-        StringBuilder sb2 = new StringBuilder();
-        sb2.append(num).append("\n").append(sb);
-        System.out.println(sb2);
+
+        Collections.sort(al);
+
+        long answer = 0;
+
+        for (int i = (int)cut; i < al.size() - (int)cut; i++) {
+            answer += al.get(i);
+        }
+
+        System.out.println(Math.round((float) answer /(n - cut*2)));
+
     }
 }
