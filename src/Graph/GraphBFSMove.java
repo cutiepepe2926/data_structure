@@ -1,10 +1,9 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayDeque;
-import java.util.StringTokenizer;
+package Graph;
 
-public class Main {
+import java.io.*;
+import java.util.*;
+
+public class GraphBFSMove {
     // 상하좌우 전파 -> 단지찾기 ㅇㅇ
 
     static boolean[][] farm;
